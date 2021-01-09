@@ -1,0 +1,238 @@
+[v-cloak] {
+    display: none;
+}
+
+
+/* .cente{
+    text-align: center;
+} */
+
+
+/* 测试 */
+
+.el-header {
+    padding: 0;
+}
+
+.el-menu {
+    border-right-width: 0;
+}
+
+.el-menu-item {
+    font-size: 15px;
+}
+
+.el-main {
+    padding: 0;
+}
+
+.logo {
+    position: relative;
+    top: 6px;
+    width: 150px;
+    text-align: center;
+    margin: 0 auto;
+    left: 50%;
+    margin-left: -75px;
+}
+
+.logo-image {
+    width: 150px;
+    margin: 0 auto;
+}
+
+
+/* end 测试 */
+
+body,
+html {
+    height: 100%;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+}
+
+.side {
+    width: 100%;
+    height: 100%;
+}
+
+.big {
+    width: 100%;
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/*侧边栏*/
+
+.edit-icon {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+}
+
+.line-limit-length {
+    width: 120px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.option {
+    margin-top: 30px;
+}
+
+.options-item {
+    width: 200px;
+    height: 60px;
+    /* color: white; */
+    font-size: 20px;
+    margin: 0 auto;
+    line-height: 60px;
+    text-align: center;
+}
+
+.options-item:nth-child(1) {
+    background-color: #2AADE5;
+}
+
+.options-item:nth-child(2) {
+    background-color: #1DD0BD;
+}
+
+.options-item:nth-child(3) {
+    background-color: #FF5C5D;
+}
+
+.options-item:nth-child(4) {
+    background-color: #0C64EA;
+}
+
+.main {
+    padding: 5px;
+}
+
+.main-left {
+    /* background-color: teal; */
+    padding: 10px;
+}
+
+.main-right {
+    /* background-color: tomato; */
+    padding: 10px;
+}
+
+.main-right-down {
+    margin-top: 10px;
+}
+
+.text-line-height {
+    line-height: 2
+}
+
+.main-right-up {
+    margin-top: 10px;
+}
+
+.main-right-down-rumors-content {
+    position: relative;
+}
+
+.main-right-down-rumors-news {
+    display: inline-block;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.main-right-down-rumors-date {
+    position: absolute;
+    right: 0;
+}
+
+.ellipsis {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.main-left-forecast {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main-left-forecast-info {
+    margin: 3px;
+}
+
+.main-left-forecast-info:nth-child(1) {
+    font-size: 26px;
+}
+
+.main-left-forecast-info:nth-child(2) {
+    font-size: 18px;
+}
+
+.main-left-forecast-info:nth-child(3) {
+    font-size: 16px;
+}
+
+.main-left-forecast-info:nth-child(4) {
+    font-size: 24px;
+    color: #2AADE5;
+}
+
+.main-left-forecast-info:nth-child(5) {
+    font-size: 16px;
+}
+
+.forecastChart {
+    width: 100%;
+    height: 250px;
+    margin: 0 auto;
+}
+
+.infobox {
+    width: 150px;
+    margin: 0 auto;
+    /* position: relative;
+    left: 50%;
+    margin-left: 50px; */
+    border-radius: 4px;
+    text-align: center;
+    line-height: 80px;
+    height: 80px;
+    margin: 10px;
+    color: white;
+    font-size: 24px;
+}
+
+.infobox-1 {
+    background-color: #409EFF;
+}
+
+.infobox-2 {
+    background-color: #67C23A;
+}
+
+.infobox-3 {
+    background-color: #F56C6C;
+}
+
+.infobox-4 {
+    background-color: #E6A23C;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.td.mapper.UserMapper">
+    <select id="countUserByUseremail" resultType="Integer" parameterType="String" >
+    select count(*) from user where  useremail=#{useremail}
+    </select>
+
+    <insert id="insertUser" parameterType="com.td.pojo.User">
+        insert into user(useremail,password,root) values (#{useremail},#{password},#{root})
+    </insert>
+
+    <select id="queryUser" resultType="com.td.pojo.User" parameterType="com.td.pojo.User">
+        select * from user where useremail=#{useremail} and password=#{password}
+    </select>
+
+    <update id="updateUser" parameterType="com.td.pojo.User">
+       update user set password=#{password} where useremail=#{useremail}
+    </update>
+
+    <update id="updateKeywords" parameterType="com.td.pojo.User">
+        update user set keywords=#{keywords} where useremail=#{useremail} and password=#{password}
+    </update>
+
+    <select id="findByName" resultType="com.td.pojo.User" parameterType="String">
+        select * from user where useremail=#{useremail}
+    </select>
+</mapper>

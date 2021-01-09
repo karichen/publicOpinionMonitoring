@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>晴雨表/公众版/首页</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="/css/RealTimeHotspot.css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css" >
+    <link rel='icon' href='https://www.pppnut.cn/image/qyb1.png' type='image/x-ico'/>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="app" v-cloak>
+    <div class="layui-layout layui-layout-admin">
+        <div th:replace="/commons/public::header"></div>
+                <el-card>
+                    <div class="row">
+                        <div class="title">
+                            综合
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <el-card style="margin-bottom: 20px;">
+                                <div class="row"  style="padding-left: 10px">
+                                    <span style="font-size: 20px">哔哩哔哩</span>
+                                </div>
+                                <el-divider content-position="right" style="margin-top: 0px">全站热点</el-divider>
+                                <div style="height: 300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div  v-for="(item,index) in  bilibiliHot" class="row">
+                                        <div :class="{'color-1':index<3,'color-2':index>=3}" class="col-md-2">{{index+1}}</div>
+                                        <div class="col-md-7" style="padding: 0">
+                                            <a :href="item.url" class="news-a">
+                                                {{item.title}}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">{{item.rank}}</div>
+                                    </div>
+                                </div>
+                                <el-divider></el-divider>
+                                <div>
+                                    <span class="color-2">12分钟前</span>
+                                </div>
+                            </el-card>
+                        </div>
+
+                        <div class="col-md-3">
+                            <el-card style="margin-bottom: 20px;">
+                                <div class="row"  style="padding-left: 10px">
+                                    <span style="font-size: 20px">百度</span>
+                                </div>
+                                <el-divider content-position="right" style="margin-top: 0px">全站热点</el-divider>
+                                <div style="height: 300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div  v-for="(item,index) in  baiduHot" class="row">
+                                        <div :class="{'color-1':index<3,'color-2':index>=3}" class="col-md-2">{{index+1}}</div>
+                                        <div class="col-md-7" style="padding: 0">
+                                            <a :href="item.url" class="news-a">
+                                                {{item.title}}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">{{transform(item.rank)}}</div>
+                                    </div>
+                                </div>
+                                <el-divider></el-divider>
+                                <div>
+                                    <span class="color-2">12分钟前</span>
+                                </div>
+                            </el-card>
+                        </div>
+
+                        <div class="col-md-3">
+                            <el-card style="margin-bottom: 20px;">
+                                <div class="row"  style="padding-left: 10px">
+                                    <span style="font-size: 20px">哔哩哔哩日搜</span>
+                                </div>
+                                <el-divider content-position="right" style="margin-top: 0px">全站热点</el-divider>
+                                <div style="height: 300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div  v-for="(item,index) in   bilibili_dailyHot" class="row">
+                                        <div :class="{'color-1':index<3,'color-2':index>=3}" class="col-md-2">{{index+1}}</div>
+                                        <div class="col-md-7" style="padding: 0">
+                                            <a :href="item.url" class="news-a">
+                                                {{item.title}}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">{{transform(item.rank)}}</div>
+                                    </div>
+                                </div>
+                                <el-divider></el-divider>
+                                <div>
+                                    <span class="color-2">12分钟前</span>
+                                </div>
+                            </el-card>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <el-card style="margin-bottom: 20px;">
+                                <div class="row"  style="padding-left: 10px">
+                                    <span style="font-size: 20px">百度贴吧</span>
+                                </div>
+                                <el-divider content-position="right" style="margin-top: 0px">贴吧热点</el-divider>
+                                <div style="height: 300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div  v-for="(item,index) in  tiebaHot" class="row">
+                                        <div :class="{'color-1':index<3,'color-2':index>=3}" class="col-md-2">{{index+1}}</div>
+                                        <div class="col-md-7" style="padding: 0">
+                                            <a :href="item.url" class="news-a">
+                                                {{item.title}}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">{{transform(item.rank)}}</div>
+                                    </div>
+                                </div>
+                                <el-divider></el-divider>
+                                <div>
+                                    <span class="color-2">12分钟前</span>
+                                </div>
+                            </el-card>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <el-card style="margin-bottom: 20px;">
+                                <div class="row"  style="padding-left: 10px">
+                                    <span style="font-size: 20px">微博热搜</span>
+                                </div>
+                                <el-divider content-position="right" style="margin-top: 0px">热搜热点</el-divider>
+                                <div style="height: 300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div  v-for="(item,index) in  weiboHot" class="row">
+                                        <div :class="{'color-1':index<3,'color-2':index>=3}" class="col-md-2">{{index+1}}</div>
+                                        <div class="col-md-7" style="padding: 0">
+                                            <a :href="item.url" class="news-a">
+                                                {{item.title}}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">{{transform(item.rank)}}</div>
+                                    </div>
+                                </div>
+                                <el-divider></el-divider>
+                                <div>
+                                    <span class="color-2">12分钟前</span>
+                                </div>
+                            </el-card>
+                        </div>
+
+                        <div class="col-md-3">
+                            <el-card style="margin-bottom: 20px;">
+                                <div class="row"  style="padding-left: 10px">
+                                    <span style="font-size: 20px">微信</span>
+                                </div>
+                                <el-divider content-position="right" style="margin-top: 0px">微信热议</el-divider>
+                                <div style="height: 300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div  v-for="(item,index) in  weixinHot" class="row">
+                                        <div :class="{'color-1':index<3,'color-2':index>=3}" class="col-md-2">{{index+1}}</div>
+                                        <div class="col-md-7" style="padding: 0">
+                                            <a :href="item.url" class="news-a">
+                                                {{item.title}}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">{{transform(item.rank)}}</div>
+                                    </div>
+                                </div>
+                                <el-divider></el-divider>
+                                <div>
+                                    <span class="color-2">12分钟前</span>
+                                </div>
+                            </el-card>
+                        </div>
+
+                        <div class="col-md-3">
+                            <el-card style="margin-bottom: 20px;">
+                                <div class="row"  style="padding-left: 10px">
+                                    <span style="font-size: 20px">知乎</span>
+                                </div>
+                                <el-divider content-position="right" style="margin-top: 0px">知乎热聊</el-divider>
+                                <div style="height: 300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div  v-for="(item,index) in  zhihuHot" class="row">
+                                        <div :class="{'color-1':index<3,'color-2':index>=3}" class="col-md-2">{{index+1}}</div>
+                                        <div class="col-md-7" style="padding: 0">
+                                            <a :href="item.url" class="news-a">
+                                                {{item.title}}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">{{transform(item.rank)}}</div>
+                                    </div>
+                                </div>
+                                <el-divider></el-divider>
+                                <div>
+                                    <span class="color-2">12分钟前</span>
+                                </div>
+                            </el-card>
+                        </div>
+
+                        <div class="col-md-3">
+                            <el-card style="margin-bottom: 20px;">
+                                <div class="row"  style="padding-left: 10px">
+                                    <span style="font-size: 20px">网易</span>
+                                </div>
+                                <el-divider content-position="right" style="margin-top: 0px">网易热榜</el-divider>
+                                <div style="height: 300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div  v-for="(item,index) in  wangyiHot" class="row">
+                                        <div :class="{'color-1':index<3,'color-2':index>=3}" class="col-md-2">{{index+1}}</div>
+                                        <div class="col-md-7" style="padding: 0">
+                                            <a :href="item.url" class="news-a">
+                                                {{item.title}}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">{{transform(item.rank)}}</div>
+                                    </div>
+                                </div>
+                                <el-divider></el-divider>
+                                <div>
+                                    <span class="color-2">12分钟前</span>
+                                </div>
+                            </el-card>
+                        </div>
+
+                    </div>
+                </el-card>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="/commons/public::js"></div>
+<script src="/js/page/realTime/realTime.js"></script>
+</html>
+</html>

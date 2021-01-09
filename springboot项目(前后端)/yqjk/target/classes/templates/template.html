@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css">
+
+</head>
+<body>
+<div id="app">
+    <div class="layui-layout layui-layout-admin">
+        <div th:replace="/commons/public::header"></div>
+        <div th:replace="/commons/public::aside"></div>
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px">
+
+            </div>
+            <div class="layui-footer">
+                <!-- 底部固定区域 -->
+                © layui.com - 底部固定区域
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="/js/component/vue.js"></script>
+<!-- import JavaScript -->
+<script src="/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {}
+        },
+        methods: {}
+    })
+</script>
+</html>

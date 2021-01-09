@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>晴雨表/公众版/舆情辟谣</title>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+
+    <div th:replace="/commons/public::css"></div>
+</head>
+
+<body>
+<div id="app" v-cloak>
+    <div class="layui-layout layui-layout-admin">
+        <div th:replace="/commons/public::header"></div>
+        <div th:replace="/commons/public::aside"></div>
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div>
+                <el-main>
+                    <!-- 天气预报 -->
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <el-breadcrumb separator="/">
+                                <el-breadcrumb-item>公众版</el-breadcrumb-item>
+                                <el-breadcrumb-item>舆情辟谣</el-breadcrumb-item>
+                            </el-breadcrumb>
+                        </div>
+                        <!-- 内容 -->
+                        <el-row :gutter=10>
+                            <el-col :span="16">
+                                <el-card class="box-card">
+                                    <div slot="header" class="clearfix">
+                                        <span>谣言趋势</span>
+                                    </div>
+                                    <!-- 内容 -->
+                                    <el-row>
+                                        <div class="forecastChart" id="forecastChart1" style="height: 530px;"></div>
+                                    </el-row>
+                                </el-card>
+                            </el-col>
+                            <el-col :span="8">
+                                <el-card class="box-card">
+                                    <div slot="header" class="clearfix">
+                                        <span>热点谣言</span>
+                                    </div>
+                                    <!-- 内容 -->
+                                    <div style="height: 525px;overflow-y: scroll">
+                                        <table class="layui-table" lay-skin="nob">
+                                            <colgroup>
+                                                <col width="30">
+                                                <col>
+                                                <col>
+                                            </colgroup>
+                                            <thead>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="(item,index) in tableData">
+                                                <td>{{index+1}}</td>
+                                                <td><a :href="item.url">{{item.title}}</a></td>
+                                                <td>{{item.rank}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </el-card>
+                            </el-col>
+
+                        </el-row>
+                            <table class="layui-table">
+                                <colgroup>
+                                    <col width="30">
+                                    <col>
+                                    <col>
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>新闻</th>
+                                    <th>热度</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(item,index) in tableData">
+                                    <td>{{index+1}}</td>
+                                    <td><a :href="item.url">{{item.title}}</a></td>
+                                    <td>{{item.rank}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+<!--                            <div style="float: right; margin: 20px;">-->
+<!--                                <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>-->
+<!--                            </div>-->
+                    </el-card>
+            </el-main>
+        </div>
+    </div>
+    <div th:replace="/commons/public::footer"></div>
+</div>
+</div>
+</body>
+<script src="/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        const element = layui.element;
+    });
+</script>
+<div th:replace="/commons/public::js"></div>
+<script src="/js/page/public/public-rumor.js"></script>
+
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>晴雨表/公众版/首页</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="/css/FrameworkHandAside.css">
+    <link rel="stylesheet" href="/css/RealTimeDetail.css">
+    <link rel='icon' href='https://www.pppnut.cn/image/qyb1.png' type='image/x-ico' />
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="//at.alicdn.com/t/font_1840871_tyj8g4lysh9.css"> -->
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div th:replace="/commons/public::header"></div>
+        <el-backtop></el-backtop>
+        <div class="container-fluid">
+            <div class="row">
+                <div style="height:240px;background-image:url('https://file.ipadown.com/tophub/assets/images/background/web-default-node.jpeg');background-size:cover;background-repeat:no-repeat;">
+                </div>
+            </div>
+            <div class="container" style="margin-bottom: 20px;">
+                <div class="row">
+                    <div class="title-box">
+                        <div class="col-md-2">
+                            <img src="https://file.ipadown.com/tophub/assets/images/media/iesdouyin.com.png" class="img-circle title-box-image" width="100%">
+                        </div>
+                        <div class="col-md-8">
+                            <div>抖音</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="rwo">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <el-card style="margin-bottom: 20px;">
+                                <div slot="header" class="clearfix">
+                                    <span> 娱乐</span>
+                                </div>
+                                <div class="card-content " v-for="(item,index) in content">
+                                    <div style="width: 100%;">
+                                        <div style=" padding: 10px;">
+                                            <span class="card-content-news-index" :class="{'color-1':index<3,'color-2':index>=3}">{{index+1}}</span>
+                                            <span class="card-content-news-content"><a :href="item.url" class="news-a">{{item.title}}</a></span>
+                                            <span class="card-content-news-hot">{{item.hot}}</span>
+                                        </div>
+                                        <hr style="margin: 0;">
+                                    </div>
+                                </div>
+                            </el-card>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-4">
+                        <el-card class="box-card">
+                            <div slot="header" class="clearfix">
+                                <span>猜你喜欢</span>
+                                <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+                            </div>
+                            <div v-for="o in 4" :key="o" class="text item">
+                                {{'列表内容 ' + o }}
+                            </div>
+                        </el-card>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<div th:replace="/commons/public::js"></div>
+<script src="/js/page/realTime/realTimeDetail.js"></script>
+
+</html>

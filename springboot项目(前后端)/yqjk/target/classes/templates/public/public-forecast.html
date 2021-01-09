@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>晴雨表/公众版/天气预报</title>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/css/public/forecast.css">
+    <link rel="stylesheet" href="/css/public/home4.css">
+    <div th:replace="/commons/public::css"></div>
+</head>
+
+<body>
+<div id="app" v-cloak>
+    <div class="layui-layout layui-layout-admin">
+        <div th:replace="/commons/public::header"></div>
+        <div th:replace="/commons/public::aside"></div>
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div>
+                <!-- 天气预报 -->
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <el-breadcrumb separator="/">
+                            <el-breadcrumb-item>公众版</el-breadcrumb-item>
+                            <el-breadcrumb-item>天气预报</el-breadcrumb-item>
+                        </el-breadcrumb>
+                    </div>
+
+                    <el-row style="text-align: center;margin-bottom: 20px;">
+                        <el-col :span="6">
+                            <div class="top-item color-1">
+                                <span class="top-item-title">正面新闻</span>
+                                <span class="top-item-number">1200</span>
+                                <i class="el-icon-bottom"></i>
+                            </div>
+                        </el-col>
+                        <el-col :span="6">
+                            <div class="top-item color-2">
+                                <span class="top-item-title">中立新闻</span>
+                                <span class="top-item-number">1200</span>
+                                <i class="el-icon-bottom"></i>
+                            </div>
+                        </el-col>
+                        <el-col :span="6">
+                            <div class="top-item color-3">
+                                <span class="top-item-title">负面新闻</span>
+                                <span class="top-item-number">1200</span>
+                                <i class="el-icon-bottom"></i>
+                            </div>
+                        </el-col>
+                        <el-col :span="6">
+                            <div class="top-item color-4">
+                                <span class="top-item-title">全部新闻</span>
+                                <span class="top-item-number">1200</span>
+                                <i class="el-icon-bottom"></i>
+                            </div>
+                        </el-col>
+                    </el-row>
+                    <!-- 内容 -->
+                    <el-row :gutter="20">
+                        <el-col :span="8">
+                            <el-card>
+                                <div slot="header" class="clearfix"><span>天气预报</span>
+                                    <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+                                </div>
+                                <div style="height: 435px;">
+                                    <el-row class="main-left-forecast">
+                                        <div class="main-left-forecast-info">20C°</div>
+                                        <div class="main-left-forecast-info">负面舆情风险指数：20%</div>
+                                        <div class="main-left-forecast-info">全网</div>
+                                        <div class="main-left-forecast-info">晴</div>
+                                    </el-row>
+                                    <el-row>
+                                        <div class="suggest-title">
+                                            建议
+                                        </div>
+
+                                        <div class="suggest-content">
+                                            气象监测显示，过去一天，南方大部地区强降雨范围有所收敛，强度减弱，仅四川盆地、云南、湖南、江西等地部分地区出现大到暴雨，局地大暴雨；但预计从今天起，雨水又将强势回归，西南地区东部至长江中下游一带再遇持续性强降雨过程，并伴有短时强降雨、雷暴大风等强对流天气，消停不足1天的暴雨预警再度开始“营业”。
+                                        </div>
+                                        <div class="suggest-title">
+                                            说明
+                                        </div>
+                                        <div class="suggest-content">
+                                            预计4日，重庆南部、云南东北部、贵州北部、湖北南部、湖南西北部、江西北部、安徽南部、浙江中北部、上海等地有大到暴雨，安徽东南部局地大暴雨；中央气象台今晨继续发布暴雨蓝色预警。
+                                        </div>
+                                    </el-row>
+                                </div>
+                            </el-card>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-card>
+                                <div slot="header" class="clearfix"><span>昨日总结</span>
+                                    <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+                                </div>
+                                <div>
+                                    <div class="forecastChart" style="margin-top: 5px;height: 430px;"
+                                         id="forecastChart2"></div>
+                                </div>
+                            </el-card>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-card>
+                                <div slot="header" class="clearfix"><span>负面新闻</span>
+                                    <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+                                </div>
+                                <div style="height: 435px;overflow-y: scroll">
+                                    <table class="layui-table" lay-skin="nob" >
+                                        <colgroup>
+                                            <col width="30">
+                                            <col>
+                                        </colgroup>
+                                        <tbody>
+                                        <tr v-for="(item,index) in tableData">
+                                            <td>{{index+1}}</td>
+                                            <td><a :href="item.url">{{item.title}}</a></td>
+                                            <td>{{item.rank}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </el-card>
+                        </el-col>
+                    </el-row>
+                    <el-row style="margin-top:20px;">
+                        <el-card>
+                            <div slot="header" class="clearfix"><span>近期热点变化</span>
+                                <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+                            </div>
+                            <div>
+                                <div class="forecastChart" style="margin-top: 5px;height: 375px;"
+                                     id="forecastChart3"></div>
+                            </div>
+                        </el-card>
+                    </el-row>
+                </el-card>
+            </div>
+        </div>
+        <div th:replace="/commons/public::footer"></div>
+    </div>
+</div>
+</body>
+<div th:replace="/commons/public::js"></div>
+<script src="/js/page/public/public-forecast.js"></script>
+<script src="/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function() {
+        const element = layui.element;
+    });
+</script>
+</html>

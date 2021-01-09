@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>登录</title>
+    <link href="/css/login.css" rel="stylesheet" type="text/css" />
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css">
+    <link rel='icon' href='https://www.pppnut.cn/image/qyb1.png' type='image/x-ico' />
+</head>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<body>
+
+<div id="app" v-cloak>
+    <div class="login_box">
+        <div class="login_l_img"><img src="/images/login-img.png" /></div>
+        <div class="login form">
+            <div class="login_name">
+                <p>welcome</p>
+            </div>
+
+            <el-form ref="formData" :rules="rules" :model="formData">
+                <div class="tip">邮箱：</div>
+                <el-form-item prop="useremail">
+                    <el-input v-model="formData.useremail" placeholder="请输入邮箱" ></el-input>
+                </el-form-item>
+                <div class="tip">密码：</div>
+                <el-form-item prop="password">
+                    <el-input v-model="formData.password" placeholder="请输入密码" show-password></el-input>
+                </el-form-item>
+                <div class="tip">验证码：</div>
+                <el-form-item prop="usercode">
+                    <el-input v-model="formData.usercode" placeholder="请输入验证码" style="width: 50%"></el-input>
+                    <el-button type="info" style="background-color: #8c939d;width:40%;margin:0 10px" v-model="formData.usercode" v-on:click="requestCode">{{ checkcode }}</el-button>
+                </el-form-item>
+                <div class="form-a-area">
+                    <el-link type="primary" href="/view/toRegiste" class="form-margin">注册</el-link>
+                    <el-link type="primary" href="/view/toRetrieve" class="form-margin">找回</el-link>
+                </div>
+                <el-button type="primary" style="width: 100%" v-on:click="submit" round>登录</el-button>
+            </el-form>
+        </div>
+        <div class="copyright"> © 晴雨表 - 5G新媒体时代的舆情天气预报员 | 关于我们 | 联系我们 | @新浪微博 | QYB 手机版</div>
+    </div>
+</div>
+<!-- import Vue before Element -->
+<script src="/js/component/vue.js"></script>
+<!-- import JavaScript -->
+<script src="/element-ui/lib/index.js"></script>
+<script src="/js/component/axios.js"></script>
+<script src="/js/login.js"></script>
+</body>
+
+</html>

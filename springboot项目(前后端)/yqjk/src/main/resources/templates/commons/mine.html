@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!--  layui  -->
+<!--2.侧边栏-->
+<div th:fragment="aside">
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item"><a th:href="@{/view/public/toPublicHome}">首页</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">个人设置</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">我的资料</a></dd>
+                        <dd><a href="">账号安全</a></dd>
+                        <dd><a href="">认证管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a >关键词任务</a></li>
+                <li class="layui-nav-item"><a >好友邀请</a></li>
+                <li class="layui-nav-item"><a >我的消息</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

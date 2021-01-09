@@ -1,0 +1,84 @@
+package com.td.service;
+
+import com.td.pojo.News;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public interface NewsService {
+    /**
+     * 查询所有新闻
+     * @return List<News>
+     */
+    public List<News> findAllNews(Integer page,String key);
+
+    /**
+     * 查询所有新闻的条数
+     * @return  Integer
+     */
+    public Integer findAllNewsLength(String key);
+
+
+    /**
+     * 查询所有新浪新闻
+     * @return List<News>
+     */
+    public List<News> findAllXinlang(Integer page,String key);
+
+    /**
+     * 查询所有新浪新闻的条数
+     * @return Integer
+     */
+    public Integer findAllXinlangLength(String key);
+
+    /**
+     * 查询所有头条新闻
+     * @return List<News>
+     */
+    public List<News> findAllToutiao(Integer page,String key);
+
+    /**
+     * 查询所有头条新闻的条数
+     * @return Integer
+     */
+    public Integer findAllToutiaoLength(String key);
+
+
+
+    /**
+     * 查询所有微信新闻
+     * @return List<News>
+     */
+    public List<News> findAllWeixin(Integer page,String key);
+
+    /**
+     * 查询所有微信新闻的条数
+     * @return Integer
+     */
+    public Integer findAllWeixinLength(String key);
+
+    /**
+     *插入一条检索词条
+     * @param kw0 一级关键词
+     * @param kw1  二级关键词
+     * @return 状态
+     */
+    public void insertKeywords(String kw0,String kw1);
+
+    /**
+     * 查询是否重叠
+     * @param kw0 一级关键词语
+     * @param kw1 二级关键词
+     * @return
+     */
+    public Integer queryNewBykw(String kw0,String kw1);
+
+    /**
+     * 查询新闻的详细信息
+     * @param id
+     * @return  News
+     */
+    public  News queryNewsDeatil(String id);
+
+}

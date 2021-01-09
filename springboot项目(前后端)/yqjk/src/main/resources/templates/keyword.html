@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舆情监控</title>
+    <link href="/css/home.css" rel="stylesheet" type="text/css" />
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css" >
+    <div th:replace="/commons/public::css"></div>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="layui-layout layui-layout-admin">
+        <el-container>
+            <el-header>
+                <div th:replace="/commons/public::header"></div>
+            </el-header>
+            <el-container class="width">
+
+                <el-aside :md="6">
+                    <el-menu default-active="1-4-1" class="el-menu-vertical-demo">
+                        <el-menu-item index="100+''" v-on:click='setIndexKey()'>
+                            <i class="el-icon-menu"></i>
+                            <span slot="title">所有</span>
+                        </el-menu-item>
+                        <el-menu-item index="200+''" @click="add_keyword_file">
+                            <i class="el-icon-plus"></i>
+                            <span slot="title">添加关键词组</span>
+                        </el-menu-item>
+                        <!-- 父循环 -->
+                        <el-submenu v-for="(item,indexF) in keywords" :key="indexF" :index="indexF+''">
+                            <!-- 标题 -->
+                            <template slot="title">
+                                <el-dropdown>
+                                    <span class="el-dropdown-link">
+                                        <i class="el-icon-edit"></i>
+                                    </span>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item @click.native='deletekeywordfile(indexF)'>删除</el-dropdown-item>
+                                        <el-dropdown-item @click.native='updatakeywordfile(indexF)'>修改</el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
+                                <span slot="title">{{item.keywordFile}}</span>
+                            </template>
+                            <!-- 添加关键字 -->
+                            <el-menu-item class="menu-item" @click='add_keyword(indexF)'>
+                                <i class="el-icon-plus"></i>
+                                <span slot="title">添加关键字</span>
+                            </el-menu-item>
+                            <!-- 关键字 子循环 -->
+                            <el-menu-item class="menu-item" v-for="(keyword,indexS) in item.keyword" :key="indexS" v-on:click='setIndexKey(keyword.content)'>
+                                <el-tooltip class="item" effect="dark" :content="keyword.content" placement="bottom" v-on:click='setIndexKey(keyword.content)'>
+                                    <div class="line-limit-length">
+                                       {{keyword.content}}
+                                    </div>
+                                </el-tooltip>
+                                <el-dropdown class="edit-icon">
+                                    <span class="el-dropdown-link">
+                                        <i class="el-icon-edit"></i>
+                                    </span>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item @click.native='deletekeyword(indexF,indexS)'>删除</el-dropdown-item>
+                                        <el-dropdown-item @click.native='updatakeyword(indexF,indexS)'>修改</el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
+                            </el-menu-item>
+                        </el-submenu>
+                    </el-menu>
+
+                </el-aside>
+
+                <el-main :md="18">
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>筛选</span>
+                            <el-button style="float: right; padding: 3px 0" type="text">确认</el-button>
+                        </div>
+                        <span>性质
+                         <el-select v-model="property" clearable placeholder="请选择" style="width: 100px">
+                            <el-option  label="正面" value="正面"></el-option>
+                            <el-option  label="负面" value="负面"></el-option>
+                        </el-select>
+                        </span>
+                        <span>排序方式
+                        <el-select v-model="rank" clearable placeholder="请选择" style="width: 100px">
+                            <el-option  label="时间" value="时间"></el-option>
+                            <el-option  label="焦点" value="焦点"></el-option>
+                            <el-option  label="类似" value="类似"></el-option>
+                        </el-select>
+                        </span>
+                        <span>展示方式:
+                        <el-select v-model="show" clearable placeholder="请选择" style="width: 100px">
+                            <el-option  label="简略" value="简略"></el-option>
+                            <el-option  label="摘要" value="摘要"></el-option>
+                        </el-select>
+                        </span>
+                        <span>范围
+                            <el-date-picker
+                                    v-model="timeLimit"
+                                    type="datetimerange"
+                                    :picker-options="pickerOptions"
+                                    range-separator="至"
+                                    start-placeholder="开始日期"
+                                    end-placeholder="结束日期"
+                                    align="right">
+                            </el-date-picker>
+                        </span>
+                    </el-card>
+                    <el-tabs type="border-card">
+
+
+                        <el-tab-pane label="所有舆情">
+                            <div class="block" v-loading="loading1"
+                                 element-loading-text="拼命加载中"
+                                 element-loading-spinner="el-icon-loading"
+                                 element-loading-background="rgba(0, 0, 0, 0.8)"
+                                 style="width: 100%">
+                                <el-timeline>
+                                    <el-timeline-item v-for="(item,index) in news1" :key="index" :timestamp="item.date.substring(0,10)" placement="top">
+                                        <el-card>
+                                            <el-link class="title" v-on:click='toDetail(item.id)' target="_blank">
+                                                {{item.title}}
+                                            </el-link >
+                                            <el-tag style="margin-left: 20px" type="success"  effect="plain">{{item.kw0}}</el-tag>
+                                            <el-tag type="success"  effect="plain">{{item.kw1}}</el-tag>
+                                            <p>{{item.text.substring(0,500)}}</p>
+                                            <p>
+                                                <el-link :href="item.url" target="_blank" style="color: #67c23a">
+                                                    {{item.url}}
+                                                </el-link>
+                                            </p>
+                                            </el-link>
+                                            <el-tag effect="plain" type="">作者:{{item.writer}}</el-tag>
+                                        </el-card>
+                                    </el-timeline-item>
+                                    <el-timeline-item></el-timeline-item>
+                                </el-timeline>
+                                <el-pagination
+                                        background
+                                        layout="prev, pager, next"
+                                        @current-change="handleAllnewslCurrentChange($event,1)"
+                                        :total="new1Pagination">
+                                </el-pagination>
+                            </div>
+                        </el-tab-pane>
+
+
+                        <el-tab-pane label="新浪舆情"  v-on:click="achieveXinlang()" >
+                            <div class="block" v-loading="loading2"
+                                 element-loading-text="拼命加载中"
+                                 element-loading-spinner="el-icon-loading"
+                                 element-loading-background="rgba(0, 0, 0, 0.8)"
+                                 style="width: 100%">
+                                <el-timeline>
+                                    <el-timeline-item v-for="(item,index) in news2" :key="index" :timestamp="item.date.substring(0,10)" placement="top">
+                                        <el-card>
+                                            <el-link class="title"  v-on:click='toDetail(item.id)' target="_blank">
+                                                {{item.title}}
+                                            </el-link>
+                                            <el-tag style="margin-left: 20px" type="success"  effect="plain">{{item.kw0}}</el-tag>
+                                            <el-tag type="success"  effect="plain">{{item.kw1}}</el-tag>
+                                            <p>{{item.text.substring(0,500)}}</p>
+                                            <p>
+                                                <el-link :href="item.url" target="_blank" style="color: #67c23a">
+                                                    {{item.url}}
+                                                </el-link>
+                                            </p>
+                                            </p>
+                                            </el-link>
+                                            <el-tag effect="plain" type="">作者:{{item.writer}}</el-tag>
+                                        </el-card>
+                                    </el-timeline-item>
+                                    <el-timeline-item></el-timeline-item>
+                                </el-timeline>
+                                <el-pagination
+                                        background
+                                        layout="prev, pager, next"
+                                        @current-change="handleAllxinlangCurrentChange($event,2)"
+                                        :total="new2Pagination">
+                                </el-pagination>
+                            </div>
+                        </el-tab-pane>
+
+                        <el-tab-pane label="头条舆情" @:click="achieveToutiao()" >
+                            <div class="block" v-loading="loading3"
+                                 element-loading-text="拼命加载中"
+                                 element-loading-spinner="el-icon-loading"
+                                 element-loading-background="rgba(0, 0, 0, 0.8)"
+                                 style="width: 100%">
+                                <el-timeline>
+                                    <el-timeline-item v-for="(item,index) in news3" :key="index" :timestamp="item.date.substring(0,10)" placement="top">
+                                        <el-card>
+                                            <el-link class="title"  v-on:click='toDetail(item.id)' target="_blank">
+                                                {{item.title}}
+                                            </el-link>
+                                            <el-tag style="margin-left: 20px" type="success"  effect="plain">{{item.kw0}}</el-tag>
+                                            <el-tag type="success"  effect="plain">{{item.kw1}}</el-tag>
+                                            <p>{{item.text.substring(0,500)}}</p>
+                                            <p>
+                                                <el-link :href="item.url" target="_blank" style="color: #67c23a">
+                                                    {{item.url}}
+                                                </el-link>
+                                            </p>
+                                            </el-link>
+                                            <el-tag effect="plain" type="">作者:{{item.writer}}</el-tag>
+                                        </el-card>
+                                    </el-timeline-item>
+                                    <el-timeline-item></el-timeline-item>
+                                </el-timeline>
+                                <el-pagination
+                                        background
+                                        layout="prev, pager, next"
+                                        @current-change="handleAlltoutiaoCurrentChange($event,3)"
+                                        :total='new3Pagination'>
+                                </el-pagination>
+                            </div>
+                        </el-tab-pane>
+
+                        <el-tab-pane label="微信舆情" @:click="achieveWeixin()" >
+                            <div class="block" v-loading="loading4"
+                                 element-loading-text="拼命加载中"
+                                 element-loading-spinner="el-icon-loading"
+                                 element-loading-background="rgba(0, 0, 0, 0.8)"
+                                 style="width: 100%">
+                                <el-timeline>
+                                    <el-timeline-item v-for="(item,index) in news4" :key="index" :timestamp="item.date.substring(0,10)" placement="top">
+                                        <el-card>
+                                            <el-link class="title"  v-on:click='toDetail(item.id)' target="_blank">
+                                                {{item.title}}
+                                            </el-link>
+                                            <el-tag style="margin-left: 20px" type="success"  effect="plain">{{item.kw0}}</el-tag>
+                                            <el-tag type="success"  effect="plain">{{item.kw1}}</el-tag>
+                                            <p>{{item.text.substring(0,500)}}</p>
+                                            <p>
+                                                <el-link :href="item.url" target="_blank" style="color: #67c23a">
+                                                    {{item.url}}
+                                                </el-link>
+                                            </p>
+                                            </el-link>
+                                            <el-tag effect="plain" type="">作者:{{item.writer}}</el-tag>
+                                        </el-card>
+                                    </el-timeline-item>
+                                    <el-timeline-item></el-timeline-item>
+                                </el-timeline>
+                                <el-pagination
+                                        background
+                                        layout="prev, pager, next"
+                                        @current-change="handleAlltoutiaoCurrentChange($event,4)"
+                                        :total='new4Pagination'>
+                                </el-pagination>
+                            </div>
+                        </el-tab-pane>
+
+                    </el-tabs>
+                </el-main>
+            </el-container>
+        </el-container>
+<!--        <el-footer>Footer</el-footer>-->
+    </div>
+</div>
+</body>
+<div th:replace="/commons/public::js"></div>
+<script src="/js/page/keyword/keywordHome.js"></script>
+</html>

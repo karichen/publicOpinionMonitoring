@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="css">
+    <link rel="stylesheet" href="/css/iconfont.css">
+    <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css" >
+    <link rel="stylesheet" href="/css/FrameworkHandAside.css">
+    <link rel='icon' href='https://www.pppnut.cn/image/qyb1.png' type='image/x-ico' />
+</div>
+
+<div th:fragment="js">
+    <script src="/js/component/vue.js"></script>
+    <script src="/element-ui/lib/index.js"></script>
+    <script src="/js/component/echarts/echarts.js"></script>
+    <script src="/js/component/axios.js"></script>
+</div>
+
+
+<!--<div th:fragment="header">-->
+<!--    <el-menu default-active="1" class="el-menu-demo" mode="horizontal" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">-->
+<!--        <img class="logo-image" src="https://www.pppnut.cn/image/qyb2.png" style="float: left;margin-left: 5px;margin-top: 5px"></img>-->
+<!--        <el-menu-item style="margin-left: 10px" index="1"><a th:href="@{/view/public/toPublicHome}">首页导航</a></el-menu-item>-->
+<!--        <el-menu-item index="2">-->
+<!--            <a th:href="@{/view/realTime/toRealTime}">实时舆情</a>-->
+<!--        </el-menu-item>-->
+<!--        <el-menu-item index="3"> <a th:href="@{/view/toHome}">关键词任务</a></el-menu-item>-->
+<!--        <el-menu-item index="4">舆情报告</el-menu-item>-->
+<!--        <el-menu-item index="5">个人版</el-menu-item>-->
+<!--        <el-menu-item index="6">vip版</el-menu-item>-->
+<!--        <el-menu-item index="8" style="float: right">-->
+<!--            <el-avatar size="medium" src="https://www.pppnut.cn/image/qyb1.png"></el-avatar>-->
+<!--        </el-menu-item>-->
+<!--        <el-submenu index="7" style="float: right">-->
+<!--            <template slot="title">{{useremail}}</template>-->
+<!--            <el-menu-item index="7-1">注销</el-menu-item>-->
+<!--            <el-menu-item index="7-2">基本信息</el-menu-item>-->
+<!--            <el-menu-item index="7-3">实名认证</el-menu-item>-->
+<!--            <el-menu-item index="7-5">设置</el-menu-item>-->
+<!--        </el-submenu>-->
+<!--        <div index="9" style="float: right;margin-right: 10px;line-height: 61px;">-->
+<!--            <el-input style="width: 250px;" placeholder="请输入内容" v-model="search" class="input-with-select">-->
+<!--                <el-button slot="append" icon="el-icon-search"></el-button>-->
+<!--            </el-input>-->
+<!--        </div>-->
+<!--    </el-menu>-->
+<!--</div>-->
+
+
+<!--<div th:fragment="aside">-->
+<!--    <el-menu background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">-->
+
+<!--        <a th:href="@{/view/public/toPublicHome}">-->
+<!--            <el-menu-item index="1"> <i class="el-icon-s-home" style="margin: 0;"></i>-->
+<!--                <span slot="title">首页导航</span>-->
+<!--            </el-menu-item>-->
+<!--        </a>-->
+<!--        <a th:href="@{/view/public/toPublicForecast}">-->
+<!--            <el-menu-item index="2"> <i class="iconfont  icon-tianqiyubao"></i>-->
+<!--                <span slot="title">天气预报</span>-->
+<!--            </el-menu-item>-->
+<!--        </a>-->
+<!--        <a th:href="@{/view/public/toPublicHotNews}">-->
+<!--            <el-menu-item index="3"> <i class="iconfont icon-redian"></i>-->
+<!--                <span slot="title">今日热点</span>-->
+<!--            </el-menu-item>-->
+<!--        </a>-->
+<!--        <a th:href="@{/view/public/toPublicRumor}">-->
+<!--            <el-menu-item index="4"> <i class="iconfont icon-yanlun_slt"></i>-->
+<!--                <span slot="title">舆情辟谣</span>-->
+<!--            </el-menu-item>-->
+<!--        </a>-->
+<!--        <a th:href="@{/view/public/toPublicService}">-->
+<!--            <el-menu-item index="5"> <i class="iconfont icon-fuwu"></i>-->
+<!--                <span slot="title">本地服务</span>-->
+<!--            </el-menu-item>-->
+<!--        </a>-->
+<!--    </el-menu>-->
+<!--</div>-->
+
+
+<!--  layui  -->
+
+<!--1.顶部栏-->
+<div th:fragment="header">
+    <div class="layui-header">
+        <div class="layui-logo">QY 晴舆表</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a th:href="@{/view/public/toPublicHome}">首页导航</a></li>
+            <li class="layui-nav-item"><a th:href="@{/view/realTime/toRealTime}">实时舆情</a></li>
+            <li class="layui-nav-item"><a th:href="@{/view/toKeyword}">关键词任务</a></li>
+            <li class="layui-nav-item"><a href="">舆情报告</a></li>
+            <li class="layui-nav-item"><a href="">个人版</a></li>
+            <li class="layui-nav-item"><a href="">vip版</a></li>
+<!--            <li class="layui-nav-item">-->
+<!--                <a href="javascript:;">其它系统</a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                    <dd><a href="">邮件管理</a></dd>-->
+<!--                    <dd><a href="">消息管理</a></dd>-->
+<!--                    <dd><a href="">授权管理</a></dd>-->
+<!--                </dl>-->
+<!--            </li>-->
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="https://www.summerx.cn/img/tx1.jpg" class="layui-nav-img">{{useremail}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">注销</a></dd>
+                    <dd><a href="">基本信息</a></dd>
+                    <dd><a href="">实名认证</a></dd>
+                    <dd><a href="">设置</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--2.侧边栏-->
+<div th:fragment="aside">
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item"><a th:href="@{/view/public/toPublicHome}"><i class="el-icon-s-home" style="margin: 0; margin-right: 10px"></i>首页导航</a></li>
+                <li class="layui-nav-item"><a th:href="@{/view/public/toPublicForecast}"><i class="iconfont  icon-tianqiyubao" style="margin-right: 10px"></i>天气预报</a></li>
+                <li class="layui-nav-item"><a th:href="@{/view/public/toPublicHotNews}"><i class="iconfont icon-redian" style="margin-right: 10px"></i>今日热点</a></li>
+                <li class="layui-nav-item"><a th:href="@{/view/public/toPublicRumor}"><i class="iconfont icon-yanlun_slt" style="margin-right: 10px"></i>舆情辟谣</a></li>
+                <li class="layui-nav-item"><a th:href="@{/view/public/toPublicService}"><i class="iconfont icon-fuwu" style="margin-right: 10px"></i>本地服务</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<div th:fragment="footer">
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © 晴雨表 - 5G新媒体时代的舆情天气预报员 | 关于我们 | 联系我们 | @新浪微博 | QYB 手机版
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+{
+    "keywords": [
+        {
+            "keywordFile": "关键词1",
+            "keyword": [
+                {
+                    "content": "内容区域"
+                },
+                {
+                    "content": "内容区域"
+                }
+            ]
+        },
+        {
+            "keywordFile": "关键词2",
+            "keyword": [
+                {
+                    "content": "内容区域"
+                },
+                {
+                    "content": "内容区域"
+                },
+                {
+                    "content": "内容区域"
+                },
+                {
+                    "content": "内容区域"
+                },
+                {
+                    "content": "内容区域"
+                },
+                {
+                    "content": "内容区域"
+                }
+            ]
+        },
+        {
+            "keywordFile": "关键词3",
+            "keyword": [
+                {
+                    "content": "内容区域"
+                },
+                {
+                    "content": "内容区域"
+                }
+            ]
+        }
+    ]
+}

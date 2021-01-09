@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>注册</title>
+    <link href="/css/login.css" rel="stylesheet" type="text/css" />
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css">
+    <link rel='icon' href='https://www.pppnut.cn/image/qyb1.png' type='image/x-ico' />
+</head>
+
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<body>
+
+<div id="app" v-cloak>
+    <div class="login_box">
+        <div class="login_l_img"><img src="/images/login-img.png" /></div>
+        <div class="login2 form">
+            <div class="login_name">
+                <p>注册</p>
+            </div>
+
+            <el-form ref="formData" :rules="rules" :model="formData">
+                <div class="tip">邮箱：</div>
+                <el-form-item prop="useremail">
+                    <el-input v-model="formData.useremail" placeholder="请输入邮箱" ></el-input>
+                </el-form-item>
+                <div class="tip">验证码：</div>
+                <el-form-item prop="usercode">
+                    <el-input v-model='formData.usercode' type="text" name="emailcode" required   placeholder="请输入邮箱验证码" autocomplete="off" style="width: 50%"></el-input>
+                    <el-button type="success" style="width:40%;margin:0 10px;padding: 11px 0px;"  v-show="show" v-on:click="requestCode()" >获取验证码</el-button>
+                    <el-button type="info" style="width:40%;margin:0 10px;padding: 11px 0px;"  v-show="!show" class="count" >{{count}}s后可以再次发送</el-button> </el-form-item>
+                </el-form-item>
+                <div class="tip">密码：</div>
+                <el-form-item prop="password">
+                    <el-input v-model="formData.password" placeholder="请输入密码" show-password></el-input>
+                </el-form-item>
+                <div class="form-a-area">
+                    <el-link  type="primary" href="/view/toLogin" class="form-margin">登录</el-link>
+                    <el-link  type="primary" href="/view/toRetrieve" class="form-margin">找回</el-link>
+                </div>
+                <el-button type="primary" style="width: 100%" v-on:click="submit" round>注册</el-button>
+            </el-form>
+
+        </div>
+        <div class="copyright"> © 晴雨表 - 5G新媒体时代的舆情天气预报员 | 关于我们 | 联系我们 | @新浪微博 | QYB 手机版</div>
+    </div>
+</div>
+<!-- import Vue before Element -->
+<script src="/js/component/vue.js"></script>
+<!-- import JavaScript -->
+<script src="/element-ui/lib/index.js"></script>
+<script src="/js/component/axios.js"></script>
+<script src="/js/registe.js"></script>
+</body>
+
+</html>

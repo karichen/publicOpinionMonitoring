@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>晴雨表/公众版/首页导航</title>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/css/public/home4.css">
+    <link rel="stylesheet" href="/css/iconfont.css">
+    <div th:replace="/commons/public::css"></div>
+</head>
+
+<body>
+<div id="app" v-cloak>
+    <div class="layui-layout layui-layout-admin">
+        <div th:replace="/commons/public::header"></div>
+        <div th:replace="/commons/public::aside"></div>
+        <div class="layui-body" >
+            <!-- 内容主体区域 -->
+            <div>
+                <el-main>
+                    <!-- 天气预报 -->
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <el-breadcrumb separator="/">
+                                <el-breadcrumb-item>公众版</el-breadcrumb-item>
+                                <el-breadcrumb-item>首页导航</el-breadcrumb-item>
+                            </el-breadcrumb>
+                        </div>
+
+                        <el-row :gutter=10>
+                            <el-col :span="8">
+                                <el-card>
+                                    <div slot="header" class="clearfix"> <span>天气预报</span>
+                                        <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+                                    </div>
+                                    <div>
+
+                                        <el-row class="main-left-forecast">
+                                            <div class="main-left-forecast-info">20C°</div>
+                                            <div class="main-left-forecast-info">负面舆情风险指数：20%</div>
+                                            <div class="main-left-forecast-info">全网</div>
+                                            <div class="main-left-forecast-info">晴</div>
+                                        </el-row>
+
+                                        <el-row style="text-align: center;">
+                                            <div class="forecastChart" style="margin-top: 5px;" id="forecastChart2"></div>
+                                        </el-row>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                            <el-col :span="16">
+                                <el-card>
+                                    <div slot="header" class="clearfix"> <span>一周舆情</span>
+                                        <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+                                    </div>
+                                    <div>
+                                        <el-row>
+                                            <div class="forecastChart" id="forecastChart3" style="height: 380px;"></div>
+                                        </el-row>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                        <!-- 今日热点 -->
+                        <el-row class="main-right-up">
+                            <el-card>
+                                <div slot="header"> <span>今日热点</span>
+                                    <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+                                </div>
+                                <div>
+                                    <table class="layui-table">
+                                        <colgroup>
+                                            <col width="50">
+                                            <col>
+                                            <col>
+                                        </colgroup>
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>新闻</th>
+                                            <th>热度</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="(item,index) in tableData1">
+                                            <td>{{index+1}}</td>
+                                            <td><a :href="item.url">{{item.title}}</a></td>
+                                            <td>{{item.rank}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </el-card>
+                        </el-row>
+
+                        <!-- 舆情辟谣 + 本地服务-->
+                        <el-row :gutter="10" class="main-right-down">
+                            <!-- 舆情辟谣 main-right-down-rumors -->
+                            <el-col :span="12" class="main-right-down-rumors">
+                                <el-card class="box-card">
+                                    <div slot="header" class="clearfix"> <span>舆情辟谣</span>
+                                        <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+                                    </div>
+                                    <div style="width: 100%; height: 500px;overflow-y: scroll">
+                                        <table class="layui-table">
+                                            <colgroup>
+                                                <col width="50">
+                                                <col>
+                                                <col>
+                                            </colgroup>
+                                            <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>新闻</th>
+                                                <th>热度</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="(item,index) in tableData2">
+                                                <td>{{index+1}}</td>
+                                                <td><a :href="item.url">{{item.title}}</a></td>
+                                                <td>{{item.rank}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </el-card>
+                            </el-col>
+
+                            <!-- 舆情辟谣 end-->
+                            <!-- 本地服务 main-right-down-local-->
+                            <el-col :span="12" class="main-right-down-local">
+                                <el-card class="box-card">
+                                    <div slot="header" class="clearfix"> <span>本地服务</span>
+                                        <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+                                    </div>
+                                    <div style="width: 100%; height: 500px;overflow-y: scroll">
+                                        <table class="layui-table">
+                                            <colgroup>
+                                                <col width="50">
+                                                <col>
+                                                <col>
+                                            </colgroup>
+                                            <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>新闻</th>
+                                                <th>热度</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="(item,index) in tableData3">
+                                                <td>{{index+1}}</td>
+                                                <td><a :href="item.url">{{item.title}}</a></td>
+                                                <td>{{item.rank}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                        <!-- 舆情辟谣 + 本地服务 end -->
+                    </el-card>
+                </el-main>
+            </div>
+        </div>
+        <div th:replace="/commons/public::footer"></div>
+    </div>
+</div>
+</body>
+<div th:replace="/commons/public::js"></div>
+<script src="/js/page/public/public-home.js"></script>
+<script src="/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function() {
+        const element = layui.element;
+    });
+</script>
+</html>

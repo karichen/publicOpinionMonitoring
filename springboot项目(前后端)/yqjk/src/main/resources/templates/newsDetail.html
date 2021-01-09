@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>晴雨表/公众版/首页</title>
+    <meta charset="UTF-8">
+    <link href="/element-ui/lib/theme-chalk/index.css" rel="stylesheet" type="text/css">
+    <link href="/css/public/home4.css" rel="stylesheet" type="text/css">
+    <link href="/css/FrameworkHandAside.css" rel="stylesheet" type="text/css">
+    <link href="/css/public/news.css" rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css" >
+    <link rel='icon' href='https://www.pppnut.cn/image/qyb1.png' type='image/x-ico'/>
+</head>
+<style>
+    .hx{
+        white-space:pre-line;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+</style>
+<body>
+<div id="app" v-cloak>
+    <div class="layui-layout layui-layout-admin">
+        <div th:replace="/commons/public::header"></div>
+        <el-main>
+            <!-- 天气预报 -->
+            <el-card class="box-card" style="width: 80%;margin: 0 auto;">
+                <div slot="header" class="clearfix">
+                    <el-breadcrumb separator="/">
+                        <el-breadcrumb-item>新闻</el-breadcrumb-item>
+                    </el-breadcrumb>
+                </div>
+                <el-row :gutter="20">
+                    <el-col :span="16">
+                        <el-card style="box-shadow: 0 0px 0px 0 rgba(0,0,0,.1);">
+                            <div class="title">[[ ${news.title} ]]</div>
+                            <div class="time">[[ ${news.date} ]]</div>
+                            <div class="article hx" style="">
+                                [[ ${news.text} ]]
+                            </div>
+                            <div class="item-title">[[ ${news.writer} ]]</div>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-card style="box-shadow: 0 0px 0px 0 rgba(0,0,0,.1);">
+                            <div class="title">#相关话题</div>
+                            <div>
+                                <el-tag type="info" class="article label">[[ ${news.kw0} ]]</el-tag>
+                                <el-tag type="info" class="article label">[[ ${news.kw1} ]]</el-tag>
+                            </div>
+                        </el-card>
+                    </el-col>
+                </el-row>
+                <div style="text-align: center;width: 100%;margin-top: 20px;">© 晴雨表 - 5G新媒体时代的舆情天气预报员 | 关于我们 | 联系我们 | @新浪微博 | QYB 手机版</div>
+            </el-card>
+        </el-main>
+    </div>
+</div>
+</body>
+<div th:replace="/commons/public::js"></div>
+<script src="/js/newsDetail.js"></script>
+</html>
